@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yewon Kwon – Assistant Professor, Korea University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --ink-light: #6B6B6B;
+    --accent: #1A3A5C;
+    --accent-warm: #C8873A;
+    --border: #E4E2DC;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(248,247,244,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-light);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem 4rem;
+    gap: 6rem;
+    align-items: center;
+  }
+  .hero-text h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    line-height: 1.1;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .hero-text h1 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+  .hero-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.8;
+  }
+  .hero-bio {
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    background: var(--accent);
+    color: white;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+  }
+  .tag.warm { background: var(--accent-warm); }
+  .tag.outline {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .hero-links {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #122b47; }
+  .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: white; }
+
+  .hero-photo { position: relative; }
+  .photo-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    max-width: 420px;
+    background: linear-gradient(135deg, #dce8f5 0%, #c5d8ef 100%);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    color: var(--accent); opacity: 0.5;
+  }
+  .photo-placeholder svg { width: 80px; height: 80px; }
+  .photo-placeholder span { font-size: 0.85rem; font-weight: 500; }
+  .photo-badge {
+    position: absolute;
+    bottom: -1rem; right: -1rem;
+    background: var(--accent-warm);
+    color: white;
+    padding: 1rem 1.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  /* ── SECTION LAYOUT ── */
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent-warm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--accent);
+  }
+
+  /* ── RESEARCH ── */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .research-card { background: var(--surface); padding: 2rem; transition: background 0.2s; }
+  .research-card:hover { background: #f0ede6; }
+  .research-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .research-card h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 0.7rem;
+  }
+  .research-card p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { display: flex; flex-direction: column; gap: 0; }
+  .pub-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .pub-year {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent-warm);
+    padding-top: 0.2rem;
+    font-weight: 400;
+  }
+  .pub-title { font-weight: 500; margin-bottom: 0.25rem; color: var(--ink); font-size: 0.97rem; }
+  .pub-meta { font-size: 0.85rem; color: var(--ink-light); font-style: italic; }
+  .pub-authors { font-size: 0.82rem; color: var(--ink-light); margin-top: 0.2rem; }
+  .pub-badge {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    align-self: start;
+    margin-top: 0.2rem;
+  }
+  .badge-journal { background: #e8f0f8; color: var(--accent); }
+  .badge-forthcoming { background: #f0eafa; color: #5c2d9a; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: start; }
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1rem;
+  }
+  .contact-label {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink-light);
+    margin-bottom: 0.2rem; font-weight: 500;
+  }
+  .contact-value { font-size: 0.92rem; color: var(--ink); }
+  .contact-map {
+    background: #dce8f5;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 280px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    opacity: 0.6;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--accent);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+  footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-text { animation: fadeUp 0.7s ease both; }
+  .hero-photo { animation: fadeUp 0.7s 0.15s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; gap: 3rem; }
+    .hero-photo { order: -1; }
+    .photo-frame { max-width: 260px; aspect-ratio: 1/1; border-radius: 50%; }
+    .photo-badge { display: none; }
+    .research-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .pub-item { grid-template-columns: 1fr; }
+    .pub-year { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Yewon Kwon</div>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <!-- Teaching 메뉴 비활성화 (섹션 복원 시 아래 주석 해제)
+    <li><a href="#teaching">Teaching</a></li>
+    -->
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-title">
+      <strong>Assistant Professor · Diplomacy and Security Major</strong><br>
+      <strong>Korea University Sejong Campus</strong>
+    </div>
+    <h1>Yewon <em>Kwon</em></h1>
+    <p class="hero-bio">
+      Hello! I study the politics of international conflict and coercion — how states bargain under threat,
+      leverage economic tools to promote their strategic interests.
+      My work draws on <strong>quantitative methods</strong> and <strong>formal theory</strong>
+      to understand when coercion works and when it fails.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">International Security</span>
+      <span class="tag warm">Coercive Diplomacy</span>
+      <span class="tag outline">Economic Sanctions</span>
+      <span class="tag outline">Conflict Bargaining</span>
+      <span class="tag outline">Nuclear Politics</span>
+      <span class="tag outline">Quantitative Methods</span>
+    </div>
+    <div class="hero-links">
+      <a href="cv.pdf" class="btn btn-primary">Download CV</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-photo">
+    <div class="photo-frame">
+      <!-- 사진 추가 시: photo-placeholder div를 지우고 아래 img 주석 해제 -->
+      <img src="photo.jpg" alt="Yewon Kwon">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="28" r="16" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 72c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Photo</span>
+      </div>
+    </div>
+    <div class="photo-badge">
+      Assistant<br>Professor<br>since 2026
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="section-header">
+    <span class="section-label">01 /</span>
+    <h2 class="section-title">Research Interests</h2>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-icon">🛡️</div>
+      <h3>International Security &amp; Conflict Bargaining</h3>
+      <p>Examining how states signal resolve, manage crises, and reach (or fail to reach) negotiated settlements in militarized disputes.</p>
+    </div>
+    <div class="research-card">
+      <div class="research-icon">⚖️</div>
+      <h3>Economic Statecraft &amp; Sanctions</h3>
+      <p>Analyzing when and how economic coercion — sanctions, trade restrictions, financial warfare — succeeds as a tool of foreign policy.</p>
+    </div>
+    <div class="research-card">
+      <div class="research-icon">☢️</div>
+      <h3>Coercive Diplomacy &amp; Nuclear Politics</h3>
+      <p>Investigating the strategic logic of nuclear deterrence, compellence, and the conditions under which nuclear threats shape state behavior.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+  <div class="section-header">
+    <span class="section-label">02 /</span>
+    <h2 class="section-title">Publications</h2>
+  </div>
+  <div class="pub-list">
+
+    <div class="pub-item">
+      <span class="pub-year">2026</span>
+      <div>
+        <div class="pub-title">Competing State Interests and the Strategic Use of Advisory Proceedings: Written Submissions in the ICJ Climate Case</div>
+        <div class="pub-meta">(forthcoming) International Studies Quarterly</div>
+        <div class="pub-authors">Yewon Kwon* and Somin Park</div>
+      </div>
+      <span class="pub-badge badge-forthcoming">Forthcoming</span>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">Revisiting Inter-Korean Events and South Koreans' Perception on Unification</div>
+        <div class="pub-meta"><em>Social Science Quarterly</em>, Vol. 105, Issue 6 · Oct. 2024</div>
+        <div class="pub-authors">Yewon Kwon* and Kyung-Suk Lee &nbsp;·&nbsp;
+          <a href="https://doi.org/10.1111/ssqu.13453" target="_blank" rel="noopener"
+             style="color:var(--accent); font-size:0.8rem;">DOI</a>
+        </div>
+      </div>
+      <span class="pub-badge badge-journal">Journal</span>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">The Double-Edged Sword of Carrots: Exploring Their Simultaneous Effects on Threat and Imposition Stages of Economic Sanctions</div>
+        <div class="pub-meta"><em>International Interactions</em> · Jul. 2024</div>
+        <div class="pub-authors">Yewon Kwon &nbsp;·&nbsp;
+          <a href="https://doi.org/10.1080/03050629.2024.2374363" target="_blank" rel="noopener"
+             style="color:var(--accent); font-size:0.8rem;">DOI</a>
+        </div>
+      </div>
+      <span class="pub-badge badge-journal">Journal</span>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">Sweetening the Deal: The Strategic Value of Combining Inducements with Militarized Compellent Threats</div>
+        <div class="pub-meta"><em>Foreign Policy Analysis</em>, Vol. 20, Issue 1 · Jan. 2024</div>
+        <div class="pub-authors">Yewon Kwon &nbsp;·&nbsp;
+          <a href="https://doi.org/10.1093/fpa/orad036" target="_blank" rel="noopener"
+             style="color:var(--accent); font-size:0.8rem;">DOI</a>
+        </div>
+      </div>
+      <span class="pub-badge badge-journal">Journal</span>
+    </div>
+
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.82rem; color:var(--ink-light); font-style:italic;">
+    * First/corresponding author
+  </p>
+</section>
+
+<!-- TEACHING (비활성화 — 복원하려면 이 주석 블록 전체를 지우세요)
+<section class="section" id="teaching">
+  <div class="section-header">
+    <span class="section-label">03 /</span>
+    <h2 class="section-title">Teaching</h2>
+  </div>
+  <div class="courses-grid">
+    <div class="course-card">
+      <div class="course-level">Undergraduate</div>
+      <div class="course-name">Introduction to International Security</div>
+      <div class="course-desc">Foundations of security studies: war, deterrence, alliances, and the changing character of armed conflict in the international system.</div>
+    </div>
+    <div class="course-card">
+      <div class="course-level">Undergraduate</div>
+      <div class="course-name">Diplomacy and Coercive Statecraft</div>
+      <div class="course-desc">The tools of statecraft — sanctions, threats, diplomacy — and how states use them to influence adversaries short of war.</div>
+    </div>
+    <div class="course-card">
+      <div class="course-level">Graduate</div>
+      <div class="course-name">Nuclear Politics and Deterrence Theory</div>
+      <div class="course-desc">Advanced seminar on nuclear strategy, crisis stability, proliferation, and the political consequences of nuclear weapons.</div>
+    </div>
+    <div class="course-card">
+      <div class="course-level">Graduate</div>
+      <div class="course-name">Quantitative Methods in Political Science</div>
+      <div class="course-desc">Applied statistics and causal inference for social science research: regression, matching, panel data, and research design.</div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <span class="section-label">03 /</span>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2dbc7d5cdccc9d5cdcce2c9cdd0c7c38cc3c18cc9d0">[email&#160;protected]</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Office 312</div>
+          <div class="contact-value">고려대학교 세종캠퍼스<br>세종특별자치시 안솔길 145</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏛️</div>
+        <div>
+          <div class="contact-label">Affiliation</div>
+          <div class="contact-value">공공사회·통일외교학부<br>통일외교안보전공</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Office Hours</div>
+          <div class="contact-value">By appointment via email</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:0.8rem; margin-top:0.5rem; flex-wrap:wrap;">
+        <!-- 실제 Google Scholar URL로 교체하세요 -->
+        <a href="https://scholar.google.com" target="_blank" rel="noopener"
+           class="btn btn-primary" style="font-size:0.78rem; padding:0.5rem 1rem;">Google Scholar</a>
+      </div>
+    </div>
+    <div class="contact-map">
+      <!-- Google Maps embed으로 교체 가능:
+      <iframe src="https://maps.google.com/maps?q=고려대학교+세종캠퍼스&output=embed"
+        width="100%" height="100%" style="border:0;opacity:1;" allowfullscreen loading="lazy"></iframe> -->
+      <span style="font-size:2rem;">🗺️</span>
+      <span>고려대학교 세종캠퍼스</span>
+      <span style="font-size:0.8rem; opacity:0.7;">세종특별자치시 안솔길 145</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Yewon Kwon · Korea Universi
